@@ -1,9 +1,17 @@
 main() {
+  // TIPOS PRIMITIVOS
+
   // ===== Números
+
+// null != vacio
+
   int a = 10;
   double b = 5.5;
 
-  int? c;
+  // print(a);
+  // print(b);
+
+  int? c = null;
 
   int _a = 30;
   double $b = 40;
@@ -21,11 +29,15 @@ main() {
 
   String nombreCompleto = '$nombre $apellido';
 
+  // print(nombreCompleto);
+
   String multilinea = '''
   Hola Mundo
   ¿Cómo estás?
   $nombreCompleto
-  O'Connor''';
+  O'Connor
+  KDASDAS
+  ''';
 
   // print(multilinea);
 
@@ -33,19 +45,22 @@ main() {
   bool isActive = true;
   bool isNotActive = !isActive;
 
-  // print( isNotActive );
+  // print(isNotActive);
 
   // ===== Lists
   // List<String> villanosDeprecated = new List();
   List<String> villanos = ['Lex', 'Red Skull', 'Doom']; // Son base 0
   //                         0        1         2
 
+  // List<dynamic> dynamicList = [false, 'Red Skull', 0, null, 0.0];
+
+  villanos.add('Duende Verde');
   villanos.add('Duende Verde');
   villanos.add('Duende Verde');
   villanos.add('Duende Verde');
   villanos.add('Duende Verde');
 
-  // print( villanos );
+  // print(villanos);
 
   var villanosSet = villanos.toSet();
   // print(villanosSet.toList());
@@ -59,7 +74,7 @@ main() {
   villanos2.add('Duende Verde');
   villanos2.add('Duende Verde');
 
-  // print( villanos2 );
+  // print(villanos2);
 
   // ====== Maps            Diccionarios / Objetos literales
   Map<int, dynamic> ironman = {
@@ -68,12 +83,15 @@ main() {
     3: 9000,
   };
 
-  // print( ironman[3] )
-  Map<String, dynamic> capitan = new Map();
+  // print(ironman[1]);
+  Map<String, dynamic> capitan = Map();
 
-  capitan.addAll(
-      {'nombre': 'Steve', 'poder': 'Soportar droga sin morir', 'nivel': 5000});
+  capitan.addAll({
+    'nombre': 'Steve',
+    'poder': 'Soportar droga sin morir',
+    'nivel': 5000,
+  });
   // capitan.addAll(ironman);
 
-  // print(capitan);
+  print(capitan);
 }

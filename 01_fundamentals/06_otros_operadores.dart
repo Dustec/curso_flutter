@@ -8,10 +8,13 @@ main() {
   // print(b);
 
   // Operadores condicionales
-  int c = 28;
-  String resp = c > 25 ? 'C es mayor a 25' : 'C es menor a 25';
+  int c = 20;
+  String resp = (c > 25) ? 'C es mayor a 25' : 'C es menor a 25';
+  // operador ternario (condicion) ? valor si verdadero : valor si falso,
 
   // print(resp);
+
+  //operador elvis ??
 
   int d = b ?? a ?? 100;
   // print(d);
@@ -30,8 +33,8 @@ main() {
   String persona1 = 'Fernando';
   String persona2 = 'Alberto';
 
-  // print( persona1 == persona2 );
-  // print( persona1 != persona2 );
+  // print(persona1 == persona2);
+  // print(persona1 != persona2);
 
   int x = 20;
   int y = 30;
@@ -45,6 +48,7 @@ main() {
   var i = 10;
   String j = '10';
 
+  print(i == j); // false
   print(i is int);
   print(j is! int); // no es INT
 }
