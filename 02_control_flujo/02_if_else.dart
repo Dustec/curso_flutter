@@ -16,9 +16,9 @@ main() {
 
   // edad = stdin.readLineSync();
 
-  if (edad >= 18) {
-    stdout.writeln('Eres mayor de edad');
-  } else {
-    stdout.writeln('Eres menor de edad');
-  }
+  // if (edad >= 18) {
+  //   stdout.writeln('Eres mayor de edad');
+  // } else {
+  //   stdout.writeln('Eres menor de edad');
+  // }
 }
