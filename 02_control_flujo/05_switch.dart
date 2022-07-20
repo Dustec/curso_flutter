@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 main() {
   int rnd = Random().nextInt(7);
 
@@ -15,41 +14,42 @@ main() {
   // } else {
   //   print('No es un día de la semana');
   // }
-  
+
   rnd = 10;
 
   print(rnd);
-  switch ( rnd ) { // 0,1,2,3,4,5,6, 'fernando', juan, pedro
+  switch (rnd) {
+    // 0,1,2,3,4,5,6
 
     case 0:
       print('Lunes');
-    break;
+      break;
 
     case 1:
       print('Martes');
-    break;
+      break;
 
     case 2:
       print('Miércoles');
-    break;
+      break;
 
     case 3:
       print('Jueves');
-    break;
+      break;
 
     case 4:
       print('Viernes');
-    break;
+      break;
 
     case 5:
       print('Sábado');
-    break;
+      break;
 
     case 6:
       print('Domingo');
-    break;
+      break;
 
-    default: 
+    default:
       print('No es un día de la semana');
   }
 }
