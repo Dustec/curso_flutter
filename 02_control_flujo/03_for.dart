@@ -1,7 +1,7 @@
 void main() {
-  // for( int i = 1; i <= 10; i++ ) {
-  //   print('index i:  ${  2 * 10  }');
-  // }
+  for (int i = 1; i <= 10; i += 2) {
+    print('index i: $i');
+  }
 
   /* EJERCICIO
        Dato de entrada: La base de la tabla de multiplicar
