@@ -10,6 +10,10 @@ main() {
   print('Hola Rai');
 }
 
+// void saludar(){}
+
 saludar() {
   // cuerpo
+
+  // return;
 }
