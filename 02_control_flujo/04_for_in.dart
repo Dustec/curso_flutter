@@ -1,11 +1,11 @@
 main() {
-  List<String> listado = ['Batman', 'Superman', 'Mujer Maravilla'];
+  List<String> listadoDeSuperheroes = ['Batman', 'Superman', 'Mujer Maravilla'];
 
-  for (int i = 0; i < listado.length; i++) {
-    print(listado[i]);
-  }
-
-  // for (String nombre in listado) {
-  //   print(nombre);
+  // for (int i = 0; i < listadoDeSuperheroes.length; i++) {
+  //   print(listadoDeSuperheroes[i]);
   // }
+
+  for (String superheroe in listadoDeSuperheroes) {
+    print(superheroe);
+  }
 }
