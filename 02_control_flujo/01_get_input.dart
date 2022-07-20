@@ -2,6 +2,8 @@ import 'dart:io';
 
 main() {
   // imprimir en terminal o cmd
+  // print('Hola Mundo!!!');
+  // stdout.writeln('Hola Mundo!');
   // stdout.write('Hola Mundo!');
 
   stdout.writeln('¿Cual es tu nombre?');
@@ -10,7 +12,7 @@ main() {
 
   String? nombre = stdin.readLineSync();
 
-  stdout.write('Tu nombre es' + (nombre ?? ''));
+  stdout.writeln('Tu nombre es: $nombre');
 
   // o se puede concaternar
 }
