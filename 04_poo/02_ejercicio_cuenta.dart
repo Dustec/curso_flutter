@@ -15,3 +15,5 @@ se ingresa una cantidad a la cuenta, si la cantidad introducida es negativa, no 
 se retira una cantidad a la cuenta, si restando la cantidad actual a la que nos pasan es negativa, 
 la cantidad de la cuenta pasa a ser 0.
 */
+
+main() {}
