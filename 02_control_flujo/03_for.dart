@@ -1,6 +1,6 @@
 void main() {
   for (int i = 1; i <= 10; i += 2) {
-    print('index i: $i');
+    print('index i: ${2 * 20}');
   }
 
   /* EJERCICIO
