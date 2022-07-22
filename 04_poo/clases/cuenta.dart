@@ -9,11 +9,11 @@ class Cuenta {
 
   Cuenta({
     required this.titular,
-    this.cantidad = 0.0,
+    this.cantidad,
   });
 
   String titular;
-  double cantidad;
+  double? cantidad;
 
   String get informacionDeLaCuenta {
     return 'La cuenta de $titular tiene \$$cantidad';
@@ -27,12 +27,14 @@ class Cuenta {
     if (cantidad < 0) {
       return;
     }
-    this.cantidad += cantidad;
+    // this.cantidad += cantidad;
+    this.cantidad = (this.cantidad ?? 0) + cantidad;
   }
 
   void retirar(double cantidad) {
-    this.cantidad -= cantidad;
-    if (this.cantidad < 0) {
+    // this.cantidad -= cantidad;
+    this.cantidad = (this.cantidad ?? 0) - cantidad;
+    if ((this.cantidad ?? 0) < 0) {
       this.cantidad = 0.0;
     }
   }
