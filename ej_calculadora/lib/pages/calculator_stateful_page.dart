@@ -19,7 +19,8 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calculadora Básica'),
+        toolbarHeight: 10,
+        backgroundColor: Colors.indigo,
       ),
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
