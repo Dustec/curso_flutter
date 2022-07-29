@@ -45,6 +45,16 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
   }
 
   void _getConcatOperation(String value) {
+    if (value == 'AC') {
+      // aqui borramos todo
+      return;
+    }
+
+    if (value == 'DELETE') {
+      // aqui borramos un caracter
+      return;
+    }
+
     if (['+', '-', '/', 'X'].contains(value)) {
       setState(() {
         _operation = value;
@@ -89,6 +99,7 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
           _result = (first * second).toStringAsFixed(4);
           break;
         default:
+          break;
       }
     });
   }
@@ -125,7 +136,7 @@ class _ResultsSection extends StatelessWidget {
                 Text(first, style: const TextStyle(fontSize: 18)),
                 Text(operation, style: const TextStyle(fontSize: 18)),
                 Text(second, style: const TextStyle(fontSize: 18)),
-                const Divider(color: Colors.black12),
+                const Divider(thickness: 2, color: Colors.black12),
                 Text(result, style: const TextStyle(fontSize: 18)),
                 const SizedBox(height: 10),
               ],
@@ -160,6 +171,22 @@ class _Keyboard extends StatelessWidget {
       height: height,
       child: Column(
         children: <Widget>[
+          Expanded(
+            child: Row(
+              children: [
+                _SquareButton(
+                  value: 'AC',
+                  onTap: onTap,
+                  color: Colors.pinkAccent,
+                ),
+                _SquareButton(
+                  value: 'DELETE',
+                  onTap: onTap,
+                  color: Colors.pinkAccent,
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: Row(
               children: <Widget>[
@@ -228,10 +255,7 @@ class _SquareButton extends StatelessWidget {
           color: Colors.white,
           fontSize: 22,
         ),
-        child: Center(
-            child: Text(
-          value,
-        )),
+        child: Center(child: Text(value)),
       ),
     );
   }
