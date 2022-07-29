@@ -187,6 +187,9 @@ class _Keyboard extends StatelessWidget {
               ],
             ),
           ),
+
+          //NOTA: Se puede crear un array, con los valores de las filas y crear un widget que haga una fila entera.
+          // ...[7,8,9,/].map((String value)=>_SquareButton(value:value))
           Expanded(
             child: Row(
               children: <Widget>[
