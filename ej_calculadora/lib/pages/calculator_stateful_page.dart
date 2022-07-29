@@ -34,8 +34,8 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
             ),
             _Keyboard(
               height: constraints.maxHeight * 0.75,
-              onTap: concatNumber,
-              onResult: () {},
+              onTap: _getConcatOperation,
+              onResult: _getResult,
             ),
           ],
         );
@@ -43,10 +43,11 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
     );
   }
 
-  void concatNumber(String value) {
+  void _getConcatOperation(String value) {
     if (['+', '-', '/', 'X'].contains(value)) {
       setState(() {
         _operation = value;
+        _concatOperation += value;
       });
       return;
     }
@@ -57,6 +58,36 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
       } else {
         _secondNumber += value;
         _concatOperation += value;
+      }
+    });
+  }
+
+  void _getResult() {
+    setState(() {
+      if (_firstNumber.isEmpty || _secondNumber.isEmpty || _operation.isEmpty) {
+        _result = 'Operación no válida';
+        return;
+      }
+
+      final List<String> resultList = _concatOperation.split(_operation);
+
+      final double first = double.parse(resultList[0]);
+      final double second = double.parse(resultList[1]);
+
+      switch (_operation) {
+        case '+':
+          _result = '${first + second}';
+          break;
+        case '-':
+          _result = '${first - second}';
+          break;
+        case '/':
+          _result = (first / second).toStringAsFixed(4);
+          break;
+        case 'X':
+          _result = (first * second).toStringAsFixed(4);
+          break;
+        default:
       }
     });
   }
