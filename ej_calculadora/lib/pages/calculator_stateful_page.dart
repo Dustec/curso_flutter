@@ -149,7 +149,14 @@ class _SquareButton extends StatelessWidget {
       child: RawMaterialButton(
         onPressed: () {},
         fillColor: color,
-        child: Center(child: Text(value)),
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        ),
+        child: Center(
+            child: Text(
+          value,
+        )),
       ),
     );
   }
