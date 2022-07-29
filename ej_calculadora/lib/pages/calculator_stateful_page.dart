@@ -8,6 +8,13 @@ class CalculatorStatefulPage extends StatefulWidget {
 }
 
 class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
+  String _firstNumber = '';
+  String _secondNumber = '';
+  String _operation = '';
+  String _concatOperation = '';
+
+  String _result = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +27,38 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
           children: <Widget>[
             _ResultsSection(
               height: constraints.maxHeight * 0.25,
+              first: _firstNumber,
+              second: _secondNumber,
+              operation: _operation,
+              result: _result,
             ),
             _Keyboard(
               height: constraints.maxHeight * 0.75,
+              onTap: concatNumber,
+              onResult: () {},
             ),
           ],
         );
       }),
     );
+  }
+
+  void concatNumber(String value) {
+    if (['+', '-', '/', 'X'].contains(value)) {
+      setState(() {
+        _operation = value;
+      });
+      return;
+    }
+    setState(() {
+      if (_operation.isEmpty) {
+        _firstNumber += value;
+        _concatOperation += value;
+      } else {
+        _secondNumber += value;
+        _concatOperation += value;
+      }
+    });
   }
 }
 
@@ -35,9 +66,17 @@ class _ResultsSection extends StatelessWidget {
   const _ResultsSection({
     Key? key,
     required this.height,
+    required this.first,
+    required this.second,
+    required this.operation,
+    required this.result,
   }) : super(key: key);
 
   final double height;
+  final String first;
+  final String second;
+  final String operation;
+  final String result;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +89,13 @@ class _ResultsSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const <Widget>[
-                Text('2000000', style: TextStyle(fontSize: 18)),
-                Text('+', style: TextStyle(fontSize: 18)),
-                Text('11', style: TextStyle(fontSize: 18)),
-                Divider(color: Colors.black12),
-                Text('81', style: TextStyle(fontSize: 18)),
-                SizedBox(height: 10),
+              children: <Widget>[
+                Text(first, style: const TextStyle(fontSize: 18)),
+                Text(operation, style: const TextStyle(fontSize: 18)),
+                Text(second, style: const TextStyle(fontSize: 18)),
+                const Divider(color: Colors.black12),
+                Text(result, style: const TextStyle(fontSize: 18)),
+                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -75,9 +114,13 @@ class _Keyboard extends StatelessWidget {
   const _Keyboard({
     Key? key,
     required this.height,
+    required this.onTap,
+    required this.onResult,
   }) : super(key: key);
 
   final double height;
+  final void Function(String value) onTap;
+  final void Function() onResult;
 
   @override
   Widget build(BuildContext context) {
@@ -87,41 +130,41 @@ class _Keyboard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Row(
-              children: const <Widget>[
-                _SquareButton(value: '7'),
-                _SquareButton(value: '8'),
-                _SquareButton(value: '9'),
-                _SquareButton(value: '/', color: Colors.indigo),
+              children: <Widget>[
+                _SquareButton(value: '7', onTap: onTap),
+                _SquareButton(value: '8', onTap: onTap),
+                _SquareButton(value: '9', onTap: onTap),
+                _SquareButton(value: '/', onTap: onTap, color: Colors.indigo),
               ],
             ),
           ),
           Expanded(
             child: Row(
-              children: const <Widget>[
-                _SquareButton(value: '4'),
-                _SquareButton(value: '5'),
-                _SquareButton(value: '6'),
-                _SquareButton(value: 'X', color: Colors.indigo),
+              children: <Widget>[
+                _SquareButton(value: '4', onTap: onTap),
+                _SquareButton(value: '5', onTap: onTap),
+                _SquareButton(value: '6', onTap: onTap),
+                _SquareButton(value: 'X', onTap: onTap, color: Colors.indigo),
               ],
             ),
           ),
           Expanded(
             child: Row(
-              children: const <Widget>[
-                _SquareButton(value: '1'),
-                _SquareButton(value: '2'),
-                _SquareButton(value: '3'),
-                _SquareButton(value: '-', color: Colors.indigo),
+              children: <Widget>[
+                _SquareButton(value: '1', onTap: onTap),
+                _SquareButton(value: '2', onTap: onTap),
+                _SquareButton(value: '3', onTap: onTap),
+                _SquareButton(value: '-', onTap: onTap, color: Colors.indigo),
               ],
             ),
           ),
           Expanded(
             child: Row(
-              children: const <Widget>[
-                _SquareButton(value: '.'),
-                _SquareButton(value: '0'),
-                _SquareButton(value: '='),
-                _SquareButton(value: '+', color: Colors.indigo),
+              children: <Widget>[
+                _SquareButton(value: '.', onTap: onTap),
+                _SquareButton(value: '0', onTap: onTap),
+                _SquareButton(value: '=', onTap: (_) => onResult()),
+                _SquareButton(value: '+', onTap: onTap, color: Colors.indigo),
               ],
             ),
           ),
@@ -135,19 +178,19 @@ class _SquareButton extends StatelessWidget {
   const _SquareButton({
     Key? key,
     required this.value,
-    this.onTap,
+    required this.onTap,
     this.color = Colors.indigoAccent,
   }) : super(key: key);
 
   final String value;
-  final void Function()? onTap;
+  final void Function(String value) onTap;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: RawMaterialButton(
-        onPressed: () {},
+        onPressed: () => onTap(value),
         fillColor: color,
         textStyle: const TextStyle(
           color: Colors.white,
