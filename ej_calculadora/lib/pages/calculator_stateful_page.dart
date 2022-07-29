@@ -19,11 +19,10 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
         return Column(
           children: <Widget>[
             _ResultsSection(
-              height: constraints.maxHeight * 0.20,
+              height: constraints.maxHeight * 0.25,
             ),
-            const Divider(height: 0),
             _Keyboard(
-              height: constraints.maxHeight * 0.80,
+              height: constraints.maxHeight * 0.75,
             ),
           ],
         );
@@ -57,6 +56,7 @@ class _ResultsSection extends StatelessWidget {
                 Text('11', style: TextStyle(fontSize: 18)),
                 Divider(color: Colors.black12),
                 Text('81', style: TextStyle(fontSize: 18)),
+                SizedBox(height: 10),
               ],
             ),
           ),
