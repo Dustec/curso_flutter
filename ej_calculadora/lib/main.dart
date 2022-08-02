@@ -1,4 +1,5 @@
-import 'package:ej_calculadora/pages/calculator_stateful_page.dart';
+import 'package:ej_calculadora/cubit/calculator_page.dart';
+// import 'package:ej_calculadora/pages/calculator_stateful_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class CalculatorApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: CalculatorStatefulPage(),
+      home: CalculatorPage(),
+      // home: CalculatorStatefulPage(),
     );
   }
 }
