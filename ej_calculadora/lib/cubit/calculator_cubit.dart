@@ -2,56 +2,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalculatorCubit extends Cubit<CalculatorState> {
   CalculatorCubit() : super(CalculatorState());
-/*
-  void setConcatOperation(String value) {
-    emit(CalculatorState(
-      concatOperation: value,
-      firstNumber: state.firstNumber,
-      secondNumber: state.secondNumber,
-      operation: state.operation,
-      result: state.result,
-    ));
-  }
-|
-  void setFirstNumber(String value) {
-    emit(CalculatorState(
-      concatOperation: state.concatOperation,
-      firstNumber: value,
-      secondNumber: state.secondNumber,
-      operation: state.operation,
-      result: state.result,
-    ));
-  }
-
-  void setSecondNumber(String value) {
-    emit(CalculatorState(
-      concatOperation: state.concatOperation,
-      firstNumber: state.firstNumber,
-      secondNumber: value,
-      operation: state.operation,
-      result: state.result,
-    ));
-  }
-
-  void setOperation(String value) {
-    emit(CalculatorState(
-      concatOperation: state.concatOperation,
-      firstNumber: state.firstNumber,
-      secondNumber: state.secondNumber,
-      operation: value,
-      result: state.result,
-    ));
-  }
-  */
 
   void getConcatOperation(String value) {
     if (value == 'AC') {
-      // aqui borramos todo
+      emit(CalculatorState());
       return;
     }
 
     if (value == 'DELETE') {
-      // aqui borramos un caracter
+      if (state.operation.isEmpty) {
+        emit(CalculatorState(
+          firstNumber:
+              state.firstNumber.substring(0, state.firstNumber.length - 1),
+          concatOperation: state.concatOperation
+              .substring(0, state.concatOperation.length - 1),
+          operation: state.operation,
+          secondNumber: state.secondNumber,
+          result: state.result,
+        ));
+        return;
+      }
+      if (state.operation.isNotEmpty && state.secondNumber.isNotEmpty) {
+        emit(CalculatorState(
+          secondNumber:
+              state.secondNumber.substring(0, state.secondNumber.length - 1),
+          concatOperation: state.concatOperation
+              .substring(0, state.concatOperation.length - 1),
+          operation: state.operation,
+          firstNumber: state.firstNumber,
+          result: state.result,
+        ));
+        return;
+      }
+      if (state.operation.isNotEmpty) {
+        emit(CalculatorState(
+          concatOperation: state.concatOperation
+              .substring(0, state.concatOperation.length - 1),
+          firstNumber: state.firstNumber,
+          result: state.result,
+        ));
+        return;
+      }
       return;
     }
 

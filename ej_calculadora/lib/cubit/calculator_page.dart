@@ -19,7 +19,7 @@ class CalculatorPage extends StatelessWidget {
         return Column(
           children: <Widget>[
             BlocBuilder<CalculatorCubit, CalculatorState>(
-              builder: (context, state) {
+              builder: (BuildContext context, CalculatorState state) {
                 return _ResultsSection(
                   height: constraints.maxHeight * 0.25,
                   first: state.firstNumber,

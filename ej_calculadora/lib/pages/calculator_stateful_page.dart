@@ -12,7 +12,6 @@ class _CalculatorStatefulPageState extends State<CalculatorStatefulPage> {
   String _secondNumber = '';
   String _operation = '';
   String _concatOperation = '';
-
   String _result = '';
 
   @override
