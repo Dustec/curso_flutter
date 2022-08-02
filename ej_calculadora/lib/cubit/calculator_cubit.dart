@@ -58,7 +58,7 @@ class CalculatorCubit extends Cubit<CalculatorState> {
     if (['+', '-', '/', 'X'].contains(value)) {
       emit(CalculatorState(
         operation: value,
-        concatOperation: value + state.concatOperation,
+        concatOperation: state.concatOperation + value,
         firstNumber: state.firstNumber,
         secondNumber: state.secondNumber,
         result: state.result,
@@ -68,16 +68,16 @@ class CalculatorCubit extends Cubit<CalculatorState> {
 
     if (state.operation.isEmpty) {
       emit(CalculatorState(
-        firstNumber: value,
-        concatOperation: value + state.concatOperation,
+        firstNumber: state.firstNumber + value,
+        concatOperation: state.concatOperation + value,
         operation: state.operation,
         secondNumber: state.secondNumber,
         result: state.result,
       ));
     } else {
       emit(CalculatorState(
-        secondNumber: value,
-        concatOperation: value + state.concatOperation,
+        secondNumber: state.secondNumber + value,
+        concatOperation: state.concatOperation + value,
         operation: state.operation,
         firstNumber: state.firstNumber,
         result: state.result,
@@ -105,7 +105,7 @@ class CalculatorCubit extends Cubit<CalculatorState> {
     final double first = double.parse(resultList[0]);
     final double second = double.parse(resultList[1]);
 
-    late final String result;
+    String result = '';
 
     switch (state.operation) {
       case '+':
