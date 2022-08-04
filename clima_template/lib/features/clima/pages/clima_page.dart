@@ -1,6 +1,10 @@
+import 'package:clima_template/features/clima/widgets/day_forecast_item.dart';
+
 import '../cubit/clima_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/main_forecast_value.dart';
 
 class ClimaPage extends StatelessWidget {
   const ClimaPage({Key? key}) : super(key: key);
@@ -35,10 +39,60 @@ class ClimaPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Image.asset('assets/cloud.png'),
-        ],
+      body: DefaultTextStyle(
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/cloud.png',
+              scale: 3,
+            ),
+            const Text('LLUVIA MODERADA'),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const <Widget>[
+                MainForecastValue(
+                  image: 'assets/thermometer.png',
+                  data: '1009 hpa',
+                ),
+                MainForecastValue(
+                  image: 'assets/water-drop.png',
+                  data: '74 %',
+                ),
+                MainForecastValue(
+                  image: 'assets/wind.png',
+                  data: '4 m/s',
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            const Text('Siguientes 5 días'),
+            const Divider(
+              color: Colors.white,
+              indent: 12,
+              endIndent: 12,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ...['LUN', 'MAR', 'MIE', 'JUE', 'VIE'].map((String e) =>
+                      DayForecastItem(
+                          weekDay: e,
+                          weatherImage: 'assets/cloud.png',
+                          temperature: '39 °C')),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
