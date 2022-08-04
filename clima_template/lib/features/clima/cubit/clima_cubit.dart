@@ -15,7 +15,8 @@ class ClimaCubit extends Cubit<ClimaState> {
       // 19.5939894,-99.1988758
       var response = await Dio().get(
           'https://api.openweathermap.org/data/2.5/weather?lat=19.5939894&lon=-99.1988758&appid=$apiKey');
-      print(response);
+      final int h = response.data['main']['humidity'];
+      emit(state.copyWith(humidity: h));
     } catch (e) {
       print(e);
     }

@@ -54,23 +54,26 @@ class ClimaPage extends StatelessWidget {
             ),
             const Text('LLUVIA MODERADA'),
             const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const <Widget>[
-                MainForecastValue(
-                  image: 'assets/thermometer.png',
-                  data: '1009 hpa',
-                ),
-                MainForecastValue(
-                  image: 'assets/water-drop.png',
-                  data: '74 %',
-                ),
-                MainForecastValue(
-                  image: 'assets/wind.png',
-                  data: '4 m/s',
-                ),
-              ],
-            ),
+            BlocBuilder<ClimaCubit, ClimaState>(
+                builder: (BuildContext context, ClimaState state) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  const MainForecastValue(
+                    image: 'assets/thermometer.png',
+                    data: '1009 hpa',
+                  ),
+                  MainForecastValue(
+                    image: 'assets/water-drop.png',
+                    data: '${state.humidity} %',
+                  ),
+                  const MainForecastValue(
+                    image: 'assets/wind.png',
+                    data: '4 m/s',
+                  ),
+                ],
+              );
+            }),
             const SizedBox(height: 24),
             const Text('Siguientes 5 días'),
             const Divider(
