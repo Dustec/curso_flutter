@@ -34,7 +34,7 @@ class ClimaPage extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () => cubit.getData(),
+            onPressed: () {},
             icon: const Icon(Icons.check),
           ),
         ],
@@ -59,17 +59,17 @@ class ClimaPage extends StatelessWidget {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  const MainForecastValue(
+                  MainForecastValue(
                     image: 'assets/thermometer.png',
-                    data: '1009 hpa',
+                    data: '${(state.current?.temperature) ?? 0} °C',
                   ),
                   MainForecastValue(
                     image: 'assets/water-drop.png',
-                    data: '${state.humidity} %',
+                    data: '${(state.current?.humidity) ?? 0} %',
                   ),
-                  const MainForecastValue(
+                  MainForecastValue(
                     image: 'assets/wind.png',
-                    data: '4 m/s',
+                    data: '${(state.current?.windSpeed) ?? 0.0} m/s',
                   ),
                 ],
               );
