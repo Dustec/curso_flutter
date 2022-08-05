@@ -21,6 +21,12 @@ class ClimaCubit extends Cubit<ClimaState> {
         CurrentWeather.fromJson(json as Map<String, dynamic>);
 
     emit(state.copyWith(current: currentWeather));
+
+    final jsonForecast = await _request(endpoint: '/data/2.5/forecast');
+    final list = jsonForecast['list'] as Iterable<dynamic>;
+    final List<DayForecast> forecast =
+        list.map((dynamic e) => DayForecast.fromJson(e)).toList();
+    emit(state.copyWith(daysList: forecast.sublist(0, 5)));
   }
 
   dynamic _request({

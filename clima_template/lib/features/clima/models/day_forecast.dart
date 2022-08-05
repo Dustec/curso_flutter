@@ -8,9 +8,13 @@ class DayForecast {
   final String weather;
   final DateTime date;
 
-  DayForecast fromJson(Map<String, dynamic> json) => DayForecast(
-        temperature: json['main']['temp'] as double,
-        weather: json['weather']['icon'] as String,
-        date: json['dt_txt'] as DateTime,
-      );
+  factory DayForecast.fromJson(Map<String, dynamic> json) {
+    final dynamic weatherItem =
+        (json['weather'] as Iterable<dynamic>).toList()[0];
+    return DayForecast(
+      temperature: json['main']['temp'] as double,
+      weather: weatherItem['icon'] as String,
+      date: DateTime.parse(json['dt_txt'] as String),
+    );
+  }
 }

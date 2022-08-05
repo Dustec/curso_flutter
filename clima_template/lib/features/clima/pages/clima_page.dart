@@ -1,9 +1,10 @@
-import 'package:clima_template/features/clima/widgets/day_forecast_item.dart';
-
-import '../cubit/clima_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../cubit/clima_cubit.dart';
+import '../models/day_forecast.dart';
+import '../widgets/day_forecast_item.dart';
 import '../widgets/main_forecast_value.dart';
 
 class ClimaPage extends StatelessWidget {
@@ -27,11 +28,14 @@ class ClimaPage extends StatelessWidget {
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
-        title: const Text(
-          'Cuautitlán Izcalli, Estado de México.',
-          maxLines: 2,
-          textAlign: TextAlign.center,
-        ),
+        title: BlocBuilder<ClimaCubit, ClimaState>(
+            builder: (BuildContext context, ClimaState state) {
+          return Text(
+            state.current?.location ?? '',
+            maxLines: 2,
+            textAlign: TextAlign.center,
+          );
+        }),
         actions: <Widget>[
           IconButton(
             onPressed: () {},
@@ -48,11 +52,24 @@ class ClimaPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/cloud.png',
-              scale: 3,
+            BlocBuilder<ClimaCubit, ClimaState>(
+              builder: (context, state) {
+                if (state.current?.weatherImage == null) {
+                  return Image.asset(
+                    'assets/cloud.png',
+                    scale: 3,
+                  );
+                }
+                return Image.network(
+                  'http://openweathermap.org/img/wn/${state.current?.weatherImage}@4x.png',
+                );
+              },
             ),
-            const Text('LLUVIA MODERADA'),
+            BlocBuilder<ClimaCubit, ClimaState>(
+                builder: (BuildContext context, ClimaState state) {
+              return Text(
+                  ((state.current?.weatherDescription) ?? '').toUpperCase());
+            }),
             const SizedBox(height: 24),
             BlocBuilder<ClimaCubit, ClimaState>(
                 builder: (BuildContext context, ClimaState state) {
@@ -75,24 +92,32 @@ class ClimaPage extends StatelessWidget {
               );
             }),
             const SizedBox(height: 24),
-            const Text('Siguientes 5 días'),
+            const Text('A lo largo del día'),
             const Divider(
               color: Colors.white,
               indent: 12,
               endIndent: 12,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  ...['LUN', 'MAR', 'MIE', 'JUE', 'VIE'].map((String e) =>
-                      DayForecastItem(
-                          weekDay: e,
-                          weatherImage: 'assets/cloud.png',
-                          temperature: '39 °C')),
-                ],
-              ),
+            BlocBuilder<ClimaCubit, ClimaState>(
+              builder: (context, state) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+                        ...(state.daysList ?? []).map((DayForecast e) =>
+                            DayForecastItem(
+                                weekDay: DateFormat('HH:mm')
+                                    .format(e.date.toLocal()),
+                                weatherImage:
+                                    'http://openweathermap.org/img/wn/${e.weather}@2x.png',
+                                temperature: '${e.temperature} °C')),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

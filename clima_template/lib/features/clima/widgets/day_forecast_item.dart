@@ -14,17 +14,20 @@ class DayForecastItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(weekDay),
-        Image.asset(
-          weatherImage,
-          width: 30,
-          height: 30,
-        ),
-        const SizedBox(width: 4),
-        Text(temperature),
-      ],
+    return SizedBox(
+      width: 80,
+      child: Column(
+        children: [
+          Text(weekDay),
+          Image.network(
+            weatherImage,
+            width: 50,
+            height: 50,
+          ),
+          const SizedBox(width: 4),
+          Text(temperature),
+        ],
+      ),
     );
   }
 }

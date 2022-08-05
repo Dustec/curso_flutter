@@ -5,6 +5,7 @@ class CurrentWeather {
     required this.windSpeed,
     required this.weatherTitle,
     required this.weatherDescription,
+    required this.weatherImage,
     required this.location,
   });
   final double temperature;
@@ -12,6 +13,7 @@ class CurrentWeather {
   final double windSpeed;
   final String weatherTitle;
   final String weatherDescription;
+  final String weatherImage;
   final String location;
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class CurrentWeather {
       windSpeed: json['wind']['speed'] as double,
       weatherTitle: weatherItem['main'],
       weatherDescription: weatherItem['description'] as String,
+      weatherImage: weatherItem['icon'] as String,
       location: json['name'] as String,
     );
   }
