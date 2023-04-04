@@ -25,16 +25,5 @@ main() {
   // b = 20;
   // c = 20;
 
-  // final personasFinal = ['Juan', 'Pedro', 'Fernando'];
-  // const personasConst = ['Juan', 'Pedro', 'Fernando'];
-
-  final List<String> personasFinal = ['Juan', 'Pedro', 'Fernando'];
-  const List<String> personasConst = ['Juan', 'Pedro', 'Fernando'];
-
-  personasFinal.add('Maria');
-  // personasConst.add('Maria');
-
-  // personasFinal = [];
-
-  print(personasFinal);
+  print(' a: $a b: $b c: $c ');
 }

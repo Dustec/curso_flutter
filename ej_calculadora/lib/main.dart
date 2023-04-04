@@ -17,8 +17,8 @@ class CalculatorApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: CalculatorProvider(),
-      // home: CalculatorStatefulPage(),
+      home: const CalculatorProvider(),
+      // home: const CalculatorStatefulPage(),
     );
   }
 }
